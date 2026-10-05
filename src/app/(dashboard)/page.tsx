@@ -1,3 +1,5 @@
+import Avaliacao from "@/components/Avaliacao"
+
 /**
  * Página principal do Dashboard: tema do curso, vídeo e resumo dos tópicos abordados.
  */
@@ -66,6 +68,10 @@ export default function Dashboard() {
             </article>
           ))}
         </div>
+      </section>
+
+      <section className="mt-12">
+        <Avaliacao />
       </section>
     </div>
   )
