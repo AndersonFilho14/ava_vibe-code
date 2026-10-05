@@ -4,7 +4,7 @@
 export default function Dashboard() {
   const curso = {
     titulo: "Compreensão e revisão de código gerado por IA",
-    videoUrl: "https://www.youtube.com/embed/e7L_8XVQBik",
+    videoUrl: "https://www.youtube.com/embed/xpKfcoQGkXs",
   }
 
   const topicos = [
