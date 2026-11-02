@@ -1,39 +1,35 @@
 import { test, expect } from '@playwright/test';
 
 test.describe('Fluxo Principal do AVA (E2E)', () => {
-  test('O aluno deve conseguir fazer login, ver o dashboard e completar um exercício', async ({ page }) => {
-    // 1. Acesso à página inicial que redireciona para login
-    await page.goto('/login');
-    
-    // 2. Preenchimento do formulário de login (Mockado)
-    await page.fill('input[type="email"]', 'aluno@vibe.com');
-    await page.fill('input[type="password"]', '123456');
-    await page.click('button[type="submit"]');
+  test('O aluno deve visualizar o curso, acessar o link do livro digital e realizar a avaliação no Dashboard', async ({ page }) => {
+    // 1. Acesso à página principal do Dashboard
+    await page.goto('/');
 
-    // 3. Verifica redirecionamento e Dashboard
-    // Assumindo que a rota inicial '/' exibe os cursos
-    await expect(page.locator('h1', { hasText: 'Meus Cursos' })).toBeVisible();
-    await expect(page.locator('text=Introdução ao TypeScript')).toBeVisible();
-
-    // 4. Acessar uma aula específica (Ex: ID 1)
-    await page.click('text=Continuar aula');
-
-    // 5. Verifica se a página de aula carregou corretamente
-    await expect(page.locator('h1', { hasText: 'Introdução ao Next.js e React' })).toBeVisible();
-    
-    // Verifica se o vídeo carregou (O Iframe)
+    // 2. Verifica título do curso e vídeo
+    await expect(
+      page.locator('h1', { hasText: 'Compreensão e revisão de código gerado por IA' })
+    ).toBeVisible();
     await expect(page.locator('iframe')).toBeVisible();
 
-    // 6. Tentar resolver o exercício
-    await expect(page.locator('h2', { hasText: 'Exercício de Fixação' })).toBeVisible();
-    
-    // Clica na resposta correta (A opção 1 baseada no índice do mock)
-    await page.click('text=Ele permite renderização do lado do servidor (SSR) nativamente');
-    
-    // Submeter a resposta
-    await page.click('button', { hasText: 'Enviar Resposta' });
+    // 3. Verifica a seção de Material Complementar e o link do Livro Digital (FlipHTML5)
+    await expect(page.locator('h2', { hasText: 'Material Complementar' })).toBeVisible();
+    const linkLivro = page.locator('a', { hasText: 'Acessar Livro' });
+    await expect(linkLivro).toBeVisible();
+    await expect(linkLivro).toHaveAttribute(
+      'href',
+      'https://online.fliphtml5.com/anderson_filho/zwqy/'
+    );
+    await expect(linkLivro).toHaveAttribute('target', '_blank');
 
-    // 7. Validar o feedback de sucesso
-    await expect(page.locator('text=Resposta Correta! Progresso salvo.')).toBeVisible();
+    // 4. Verifica seção de Resumo dos tópicos
+    await expect(page.locator('h2', { hasText: 'Resumo dos tópicos' })).toBeVisible();
+
+    // 5. Verifica que a Avaliação de Conhecimento pode ser iniciada
+    const botaoIniciar = page.locator('button', { hasText: 'Iniciar Avaliação' });
+    await expect(botaoIniciar).toBeVisible();
+    await botaoIniciar.click();
+
+    await expect(page.locator('text=Questão 1 de 8')).toBeVisible();
   });
 });
+

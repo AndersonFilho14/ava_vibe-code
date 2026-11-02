@@ -1,12 +1,12 @@
+import { BookOpen, ExternalLink } from "lucide-react"
 import Avaliacao from "@/components/Avaliacao"
 
-/**
- * Página principal do Dashboard: tema do curso, vídeo e resumo dos tópicos abordados.
- */
+/** Renderiza a página principal do Dashboard com vídeo, resumo dos tópicos, livro digital e avaliação. */
 export default function Dashboard() {
   const curso = {
     titulo: "Compreensão e revisão de código gerado por IA",
     videoUrl: "https://www.youtube.com/embed/xpKfcoQGkXs",
+    livroUrl: "https://online.fliphtml5.com/anderson_filho/zwqy/",
   }
 
   const topicos = [
@@ -67,6 +67,32 @@ export default function Dashboard() {
               <p className="text-slate-300 leading-relaxed">{topico.texto}</p>
             </article>
           ))}
+        </div>
+      </section>
+
+      <section className="space-y-4">
+        <h2 className="text-xl font-bold text-slate-100">Material Complementar</h2>
+        <div className="bg-slate-900 p-6 rounded-xl border border-slate-800 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+          <div className="flex items-start gap-4">
+            <div className="p-3 bg-blue-950/60 border border-blue-800/50 rounded-lg text-blue-400">
+              <BookOpen className="w-6 h-6" />
+            </div>
+            <div>
+              <h3 className="font-bold text-lg text-slate-100">Livro Digital do Curso</h3>
+              <p className="text-slate-400 text-sm mt-1">
+                Acesse o livro interativo completo no FlipHTML5 para aprofundar os conceitos abordados na aula.
+              </p>
+            </div>
+          </div>
+          <a
+            href={curso.livroUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2.5 px-5 rounded-lg transition-colors shrink-0"
+          >
+            <span>Acessar Livro</span>
+            <ExternalLink className="w-4 h-4" />
+          </a>
         </div>
       </section>
 
