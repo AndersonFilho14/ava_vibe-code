@@ -1,12 +1,14 @@
-import { BookOpen, ExternalLink } from "lucide-react"
+import { BookOpen, ExternalLink, FileText } from "lucide-react"
 import Avaliacao from "@/components/Avaliacao"
 
-/** Renderiza a página principal do Dashboard com vídeo, resumo dos tópicos, livro digital e avaliação. */
+/** Renderiza a página principal do Dashboard com vídeo, resumo dos tópicos, livro digital, infográfico e avaliação. */
 export default function Dashboard() {
   const curso = {
     titulo: "Compreensão e revisão de código gerado por IA",
     videoUrl: "https://www.youtube.com/embed/xpKfcoQGkXs",
     livroUrl: "https://online.fliphtml5.com/anderson_filho/zwqy/",
+    infograficoUrl: "/infografico.pdf",
+    infograficoImg: "/infografico.png",
   }
 
   const topicos = [
@@ -93,6 +95,41 @@ export default function Dashboard() {
             <span>Acessar Livro</span>
             <ExternalLink className="w-4 h-4" />
           </a>
+        </div>
+
+        <div className="bg-slate-900 p-6 rounded-xl border border-slate-800 space-y-6">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div className="flex items-start gap-4">
+              <div className="p-3 bg-blue-950/60 border border-blue-800/50 rounded-lg text-blue-400">
+                <FileText className="w-6 h-6" />
+              </div>
+              <div>
+                <h3 className="font-bold text-lg text-slate-100">
+                  Infográfico: Checklist Final de Aprovação
+                </h3>
+                <p className="text-slate-400 text-sm mt-1">
+                  Guia visual com os 6 passos essenciais de verificação antes de colocar um código gerado por IA em produção.
+                </p>
+              </div>
+            </div>
+            <a
+              href={curso.infograficoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-100 font-semibold py-2.5 px-5 rounded-lg transition-colors shrink-0"
+            >
+              <span>Abrir Infográfico (PDF)</span>
+              <ExternalLink className="w-4 h-4" />
+            </a>
+          </div>
+
+          <div className="flex justify-center bg-slate-950/60 p-4 rounded-xl border border-slate-800">
+            <img
+              src={curso.infograficoImg}
+              alt="Infográfico: Checklist Final de Aprovação"
+              className="max-w-md w-full h-auto rounded-lg shadow-md"
+            />
+          </div>
         </div>
       </section>
 
